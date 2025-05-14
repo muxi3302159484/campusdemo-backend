@@ -33,6 +33,7 @@ public class Notification {
     @JoinColumn(name = "target_id", referencedColumnName = "schedule_id", insertable = false, updatable = false)
     private Schedule schedule;
 
+
     // Getters and Setters
     public Integer getId() {
         return id;

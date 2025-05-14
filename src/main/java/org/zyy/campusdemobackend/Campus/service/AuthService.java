@@ -65,4 +65,9 @@ public class AuthService {
         }
         return isPasswordMatch;
     }
+
+    public Integer getUserIdByUsername(String username) {
+        User user = userRepository.findByUsername(username);
+        return user != null ? user.getUserId() : null;
+    }
 }

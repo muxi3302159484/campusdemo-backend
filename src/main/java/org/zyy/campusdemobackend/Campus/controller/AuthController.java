@@ -26,9 +26,11 @@ public class AuthController {
         boolean isValid = authService.validateUser(request.getUsername(), request.getPassword());
         if (isValid) {
             String token = jwtService.generateToken(request.getUsername());
+            Integer userId = authService.getUserIdByUsername(request.getUsername());
             return ResponseEntity.ok(Map.of(
                     "success", true,
                     "token", token,
+                    "userId", userId,
                     "message", "登录成功"
             ));
         } else {
