@@ -30,7 +30,12 @@ public class Message {
     public LocalDateTime getSentAt() {
         return sentAt;
     }
-
+    public Boolean getIsRead() {
+        return isRead;
+    }
+    public void setIsRead(Boolean isRead) {
+        this.isRead = isRead;
+    }
     public void setSentAt(LocalDateTime sentAt) {
         this.sentAt = sentAt;
     }
