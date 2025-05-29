@@ -25,8 +25,7 @@ public class User {
     @Column(name = "role", nullable = false)
     private String role;
 
-    @Column(name = "avatar")
-    private String avatar; // 新增字段
+
 
     // Getters and Setters
     public Integer getUserId() {
@@ -77,11 +76,5 @@ public class User {
         this.role = role;
     }
 
-    public String getAvatar() { // 新增 Getter
-        return avatar;
-    }
 
-    public void setAvatar(String avatar) { // 新增 Setter
-        this.avatar = avatar;
-    }
 }

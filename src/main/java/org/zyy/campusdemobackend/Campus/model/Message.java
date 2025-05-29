@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "Messages")
+@Table(name = "messages")
 public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -26,9 +26,29 @@ public class Message {
     @Column(name = "sent_at")
     private LocalDateTime sentAt;
 
-    // Getter and Setter for sentAt
-    public LocalDateTime getSentAt() {
-        return sentAt;
+    public Integer getMessageId() {
+        return messageId;
+    }
+    public void setMessageId(Integer messageId) {
+        this.messageId = messageId;
+    }
+    public Integer getSenderId() {
+        return senderId;
+    }
+    public void setSenderId(Integer senderId) {
+        this.senderId = senderId;
+    }
+    public Integer getReceiverId() {
+        return receiverId;
+    }
+    public void setReceiverId(Integer receiverId) {
+        this.receiverId = receiverId;
+    }
+    public String getContent() {
+        return content;
+    }
+    public void setContent(String content) {
+        this.content = content;
     }
     public Boolean getIsRead() {
         return isRead;
@@ -36,18 +56,10 @@ public class Message {
     public void setIsRead(Boolean isRead) {
         this.isRead = isRead;
     }
+    public LocalDateTime getSentAt() {
+        return sentAt;
+    }
     public void setSentAt(LocalDateTime sentAt) {
         this.sentAt = sentAt;
     }
-
-    // Getter and Setter for receiverId
-    public Integer getReceiverId() {
-        return receiverId;
-    }
-
-    public void setReceiverId(Integer receiverId) {
-        this.receiverId = receiverId;
-    }
-
-    // 其他字段的 Getter 和 Setter
 }

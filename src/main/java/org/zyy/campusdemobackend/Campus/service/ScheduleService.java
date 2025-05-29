@@ -2,6 +2,7 @@ package org.zyy.campusdemobackend.Campus.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.zyy.campusdemobackend.Campus.model.Schedule;
 import org.zyy.campusdemobackend.Campus.repository.ScheduleRepository;
 
@@ -19,6 +20,7 @@ public class ScheduleService {
     }
 
     // 更新课程表
+    @Transactional
     public void updateSchedule(Long userId, List<Schedule> schedules) {
         // 删除用户的旧课程表
         scheduleRepository.deleteByUserId(userId);

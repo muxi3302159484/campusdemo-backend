@@ -1,13 +1,14 @@
 package org.zyy.campusdemobackend.Campus.repository;
 
-import java.util.List;
-import org.zyy.campusdemobackend.Campus.model.Message;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.zyy.campusdemobackend.Campus.model.Message;
 
+import java.util.List;
+
+@Repository
 public interface MessageRepository extends JpaRepository<Message, Integer> {
-    List<Message> findBySenderIdAndReceiverIdOrSenderIdAndReceiverId(
-            Integer senderId1, Integer receiverId1, Integer senderId2, Integer receiverId2
+    List<Message> findBySenderIdAndReceiverIdOrReceiverIdAndSenderId(
+            Integer senderId1, Integer receiverId1, Integer receiverId2, Integer senderId2
     );
-
-    List<Message> findBySenderIdOrReceiverId(Integer senderId, Integer receiverId);
 }

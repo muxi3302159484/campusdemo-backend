@@ -6,6 +6,8 @@ public class RegisterRequest {
     private String studentId;
     private String password;
     private String role;
+    private Integer schoolId;         // 新增
+    private Integer departmentId;     // 新增
 
     // Getters and Setters
     public String getUsername() {
@@ -48,7 +50,22 @@ public class RegisterRequest {
         this.role = role;
     }
 
-    // Override toString() method
+    public Integer getSchoolId() {
+        return schoolId;
+    }
+
+    public void setSchoolId(Integer schoolId) {
+        this.schoolId = schoolId;
+    }
+
+    public Integer getDepartmentId() {
+        return departmentId;
+    }
+
+    public void setDepartmentId(Integer departmentId) {
+        this.departmentId = departmentId;
+    }
+
     @Override
     public String toString() {
         return "RegisterRequest{" +
@@ -57,6 +74,8 @@ public class RegisterRequest {
                 ", studentId='" + studentId + '\'' +
                 ", password='" + password + '\'' +
                 ", role='" + role + '\'' +
+                ", schoolId=" + schoolId +
+                ", departmentId=" + departmentId +
                 '}';
     }
 }

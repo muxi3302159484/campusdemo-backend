@@ -1,3 +1,4 @@
+
 package org.zyy.campusdemobackend.Campus.model;
 
 import javax.persistence.*;
@@ -6,21 +7,23 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "Posts")
 public class Post {
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Id
     @Column(name = "post_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer postId;
 
-    @Column(name = "user_id", nullable = false)
-    private Integer userId;
-
     @Column(name = "content", nullable = false)
     private String content;
 
-    @Enumerated(EnumType.STRING)
     @Column(name = "post_type")
-    private PostType postType;
+    private String postType; // 只存 text/image/video
+
+    @Column(name = "tag")
+    private String tag;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "privacy")
@@ -35,68 +38,36 @@ public class Post {
     @Column(name = "image_url")
     private String imageUrl;
 
+
+
     // Getters and Setters
-    public Integer getPostId() {
-        return postId;
+    public String getTag() {
+        return tag;
     }
 
-    public void setPostId(Integer postId) {
-        this.postId = postId;
+    public void setTag(String tag) {
+        this.tag = tag;
     }
+    public Integer getPostId() { return postId; }
+    public void setPostId(Integer postId) { this.postId = postId; }
 
-    public Integer getUserId() {
-        return userId;
-    }
+    public User getUser() { return user; }
+    public void setUser(User user) { this.user = user; }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
-    }
+    public String getContent() { return content; }
+    public void setContent(String content) { this.content = content; }
 
-    public String getContent() {
-        return content;
-    }
+    public Privacy getPrivacy() { return privacy; }
+    public void setPrivacy(Privacy privacy) { this.privacy = privacy; }
 
-    public void setContent(String content) {
-        this.content = content;
-    }
+    public LocalDateTime getCreatedAt() { return createdAt; }
+    public void setCreatedAt(LocalDateTime createdAt) { this.createdAt = createdAt; }
 
-    public PostType getPostType() {
-        return postType;
-    }
+    public LocalDateTime getUpdatedAt() { return updatedAt; }
+    public void setUpdatedAt(LocalDateTime updatedAt) { this.updatedAt = updatedAt; }
 
-    public void setPostType(PostType postType) {
-        this.postType = postType;
-    }
+    public String getImageUrl() { return imageUrl; }
+    public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
 
-    public Privacy getPrivacy() {
-        return privacy;
-    }
 
-    public void setPrivacy(Privacy privacy) {
-        this.privacy = privacy;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public LocalDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(LocalDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
-    }
 }

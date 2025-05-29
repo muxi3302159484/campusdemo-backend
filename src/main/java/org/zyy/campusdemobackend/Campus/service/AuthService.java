@@ -7,15 +7,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.zyy.campusdemobackend.Campus.model.RegisterRequest;
 import org.zyy.campusdemobackend.Campus.model.User;
+import org.zyy.campusdemobackend.Campus.model.UserDetails;
 import org.zyy.campusdemobackend.Campus.repository.UserRepository;
+import org.zyy.campusdemobackend.Campus.repository.UserDetailsRepository;
+
+import java.time.LocalDateTime;
 
 @Service
 public class AuthService {
+
 
     private static final Logger logger = LoggerFactory.getLogger(AuthService.class);
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private UserDetailsRepository userDetailsRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -37,6 +45,18 @@ public class AuthService {
         user.setRole(request.getRole());
 
         userRepository.save(user);
+
+        // 新增：保存用户详细信息
+        UserDetails details = new UserDetails();
+        details.setUserId(user.getUserId());
+        details.setRegistrationDate(LocalDateTime.now());
+        details.setSchoolId(request.getSchoolId());
+        details.setDepartmentId(request.getDepartmentId());
+        details.setIsActive(true);
+        details.setIsEmailVerified(false);
+        details.setStudentId(request.getStudentId());
+        userDetailsRepository.save(details);
+
         logger.info("用户注册成功: 用户名={}, 学号={}, 邮箱={}", user.getUsername(), user.getStudentId(), user.getSchoolEmail());
     }
 
@@ -60,14 +80,25 @@ public class AuthService {
         boolean isPasswordMatch = passwordEncoder.matches(rawPassword, user.getPasswordHash());
         if (isPasswordMatch) {
             logger.info("登录成功: 用户名={}", username);
+            // 更新 lastLogin
+            UserDetails details = userDetailsRepository.findByUserId(user.getUserId());
+            if (details != null) {
+                details.setLastLogin(LocalDateTime.now());
+                userDetailsRepository.save(details);
+            }
         } else {
             logger.warn("登录失败，密码不匹配: 用户名={}", username);
         }
         return isPasswordMatch;
     }
-
-    public Integer getUserIdByUsername(String username) {
-        User user = userRepository.findByUsername(username);
-        return user != null ? user.getUserId() : null;
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
-}
+
+        // 新增：根据 userId 查用户详细信息
+        public UserDetails getUserDetailsByUserId(Integer userId)
+        {
+            return userDetailsRepository.findByUserId(userId);
+        }
+
+    }
