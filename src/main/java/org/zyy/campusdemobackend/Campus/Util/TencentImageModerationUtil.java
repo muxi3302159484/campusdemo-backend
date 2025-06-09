@@ -13,6 +13,10 @@ import org.springframework.stereotype.Component;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.Base64;
+/**
+ * 腾讯云图片内容安全工具类
+ * GitHub: muxi3302159484
+ */
 
 @Component
 public class TencentImageModerationUtil {
