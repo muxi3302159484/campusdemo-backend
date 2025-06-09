@@ -16,7 +16,7 @@
    git clone https://github.com/muxi3302159484/campusdemo-backend.git
    cd campusdemo-backend
 配置数据库  
-在 src/main/resources/application.properties 中配置数据库连接（建议使用环境变量或 .env 文件管理敏感信息）。
+在 src/main/resources/application.properties 中配置数据库连接。
 安装依赖并构建  
 mvn clean install
 运行项目  
